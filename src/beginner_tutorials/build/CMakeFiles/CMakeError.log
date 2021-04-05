@@ -1,0 +1,63 @@
+Performing C SOURCE FILE Test CMAKE_HAVE_LIBC_PTHREAD failed with the following output:
+Change Dir: /home/kpiekorz/catkin_ws/src/beginner_tutorials/build/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/make cmTC_375d6/fast && /usr/bin/make  -f CMakeFiles/cmTC_375d6.dir/build.make CMakeFiles/cmTC_375d6.dir/build
+make[1]: Entering directory '/home/kpiekorz/catkin_ws/src/beginner_tutorials/build/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_375d6.dir/src.c.o
+/usr/bin/clang-6.0   -DCMAKE_HAVE_LIBC_PTHREAD   -o CMakeFiles/cmTC_375d6.dir/src.c.o   -c /home/kpiekorz/catkin_ws/src/beginner_tutorials/build/CMakeFiles/CMakeTmp/src.c
+Linking C executable cmTC_375d6
+/usr/local/bin/cmake -E cmake_link_script CMakeFiles/cmTC_375d6.dir/link.txt --verbose=1
+/usr/bin/clang-6.0  -DCMAKE_HAVE_LIBC_PTHREAD    -rdynamic CMakeFiles/cmTC_375d6.dir/src.c.o  -o cmTC_375d6 
+CMakeFiles/cmTC_375d6.dir/src.c.o: In function `main':
+src.c:(.text+0x35): undefined reference to `pthread_create'
+src.c:(.text+0x41): undefined reference to `pthread_detach'
+src.c:(.text+0x53): undefined reference to `pthread_join'
+src.c:(.text+0x6a): undefined reference to `pthread_atfork'
+clang: error: linker command failed with exit code 1 (use -v to see invocation)
+CMakeFiles/cmTC_375d6.dir/build.make:89: recipe for target 'cmTC_375d6' failed
+make[1]: *** [cmTC_375d6] Error 1
+make[1]: Leaving directory '/home/kpiekorz/catkin_ws/src/beginner_tutorials/build/CMakeFiles/CMakeTmp'
+Makefile:124: recipe for target 'cmTC_375d6/fast' failed
+make: *** [cmTC_375d6/fast] Error 2
+
+
+Source file was:
+#include <pthread.h>
+
+void* test_func(void* data)
+{
+  return data;
+}
+
+int main(void)
+{
+  pthread_t thread;
+  pthread_create(&thread, NULL, test_func, NULL);
+  pthread_detach(thread);
+  pthread_join(thread, NULL);
+  pthread_atfork(NULL, NULL, NULL);
+  pthread_exit(NULL);
+
+  return 0;
+}
+
+Determining if the function pthread_create exists in the pthreads failed with the following output:
+Change Dir: /home/kpiekorz/catkin_ws/src/beginner_tutorials/build/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/make cmTC_1f41f/fast && /usr/bin/make  -f CMakeFiles/cmTC_1f41f.dir/build.make CMakeFiles/cmTC_1f41f.dir/build
+make[1]: Entering directory '/home/kpiekorz/catkin_ws/src/beginner_tutorials/build/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_1f41f.dir/CheckFunctionExists.c.o
+/usr/bin/clang-6.0   -DCHECK_FUNCTION_EXISTS=pthread_create   -o CMakeFiles/cmTC_1f41f.dir/CheckFunctionExists.c.o   -c /usr/local/share/cmake-3.16/Modules/CheckFunctionExists.c
+Linking C executable cmTC_1f41f
+/usr/local/bin/cmake -E cmake_link_script CMakeFiles/cmTC_1f41f.dir/link.txt --verbose=1
+/usr/bin/clang-6.0  -DCHECK_FUNCTION_EXISTS=pthread_create    -rdynamic CMakeFiles/cmTC_1f41f.dir/CheckFunctionExists.c.o  -o cmTC_1f41f  -lpthreads 
+/usr/bin/ld: cannot find -lpthreads
+clang: error: linker command failed with exit code 1 (use -v to see invocation)
+CMakeFiles/cmTC_1f41f.dir/build.make:89: recipe for target 'cmTC_1f41f' failed
+make[1]: *** [cmTC_1f41f] Error 1
+make[1]: Leaving directory '/home/kpiekorz/catkin_ws/src/beginner_tutorials/build/CMakeFiles/CMakeTmp'
+Makefile:124: recipe for target 'cmTC_1f41f/fast' failed
+make: *** [cmTC_1f41f/fast] Error 2
+
+
+
